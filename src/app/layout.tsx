@@ -39,15 +39,7 @@ export default function RootLayout({
       >
         <div className="flex min-h-screen flex-col">
           <header className="border-b border-neutral-800 bg-neutral-950/90 backdrop-blur">
-            <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-4">
-              <div className="text-base font-semibold tracking-tight">
-                <Link
-                  href="/"
-                  className="transition hover:text-sky-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
-                >
-                  Sumeet Singh Arora
-                </Link>
-              </div>
+            <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-4 px-6 py-4">
               <nav aria-label="Main navigation">
                 <ul className="flex flex-wrap items-center gap-3 text-sm font-medium text-neutral-200">
                   {navItems.map((item) => (
