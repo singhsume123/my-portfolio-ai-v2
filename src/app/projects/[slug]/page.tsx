@@ -137,7 +137,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   "Code review processes are bottlenecked by manual triage of feedback. PR comments often contain similar issues across different files, regression risks go unnoticed, and actionable fixes require significant reviewer effort to propose. Teams need automated assistance to cluster related findings and suggest targeted remediation."
                 }
                 {project.slug === "portfolio-blog" && 
-                  "Technical professionals need a platform that showcases their work effectively while supporting content creation. Most solutions either prioritize aesthetics over functionality or require complex CMSs that over-engineer the publishing experience. The goal was a canonical web presence with integrated distribution to platforms like Substack."
+                  "Technical professionals need a platform that effectively showcases their work while supporting long-form content creation. Existing solutions often sacrifice performance for features or require heavy CMSs that complicate the publishing workflow. The challenge was building a fast, maintainable portfolio that serves both as a project showcase and a technical blog."
                 }
               </p>
             </div>
@@ -175,7 +175,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   "Created an AI-powered workflow that processes PR feedback efficiently, reducing review cycles by clustering related issues and auto-generating targeted fix suggestions. The system runs safely in CI environments with built-in guardrails, improving both review velocity and code quality assurance."
                 }
                 {project.slug === "portfolio-blog" && 
-                  "Built a modern portfolio platform that balances professional presentation with content creation capabilities. The site serves as a canonical source of truth with streamlined cross-posting workflows, supporting both project showcases and technical writing with integrated AI-powered summaries."
+                  "Delivered a high-performance portfolio platform using Next.js with static generation, achieving excellent Core Web Vitals scores. The MDX-based blog system enables rich technical content while maintaining fast load times. The structured project data model allows for consistent presentation across different views and scales easily with new content."
                 }
               </p>
             </div>
@@ -194,7 +194,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   "Enhance the clustering algorithm with semantic analysis of code changes, add integration with issue tracking systems for automated follow-up, and expand the fix suggestion engine to handle more complex refactoring scenarios. Consider adding support for design pattern recommendations."
                 }
                 {project.slug === "portfolio-blog" && 
-                  "Implement RSS feeds and enhanced SEO optimization, add a content management interface for easier post authoring, and integrate analytics to understand content performance. Consider adding interactive elements like project demos and code playground embedding."
+                  "Add OpenAI-powered content summarization for blog posts, implement RSS feeds and enhanced meta tags for better discoverability, and integrate view analytics to understand reader engagement. Consider adding search functionality and interactive code examples for technical posts."
                 }
               </p>
             </div>
