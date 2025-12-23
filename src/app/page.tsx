@@ -21,48 +21,29 @@ export default function Home() {
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <a
-            href="#featured-projects"
+          <Link
+            href="/projects"
             className="rounded-full bg-sky-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
           >
-            Featured Projects
-          </a>
+            View All Projects
+          </Link>
+          <Link
+            href="/blogs"
+            className="rounded-full border border-neutral-700 px-5 py-2 text-sm font-medium text-neutral-200 transition hover:border-sky-400 hover:text-sky-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+          >
+            Read All Blogs
+          </Link>
           <Link
             href="/about"
             className="rounded-full border border-neutral-700 px-5 py-2 text-sm font-medium text-neutral-200 transition hover:border-sky-400 hover:text-sky-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
           >
-            About Page
+            About Me
           </Link>
         </div>
       </header>
 
-      <section
-        id="about"
-        className="grid gap-8 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-8 sm:grid-cols-3 sm:items-start"
-      >
-        <div className="sm:col-span-1">
-          <h2 className="text-xl font-semibold text-neutral-50">About</h2>
-          <p className="mt-2 text-sm text-neutral-400">
-            A bit of context and how I approach work.
-          </p>
-        </div>
-        <div className="sm:col-span-2 space-y-4 text-neutral-200">
-          <p>
-            I love building cohesive products—pairing clear information
-            architecture with pragmatic engineering. I move from discovery to
-            delivery quickly, shaping ideas through prototypes and iterating
-            with real feedback.
-          </p>
-          <p>
-            Right now I am focused on AI-assisted experiences, design systems,
-            and performant web apps. I enjoy collaborating closely with
-            designers, engineers, and stakeholders to align on outcomes and ship
-            high-quality work.
-          </p>
-        </div>
-      </section>
-
-      <section id="featured-projects" className="space-y-6">
+      <div className="grid gap-12 lg:grid-cols-2">
+        <section className="space-y-6">
         <div className="flex items-center justify-between gap-4">
           <div>
             <h2 className="text-xl font-semibold text-neutral-50">
@@ -73,7 +54,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6">
           {projects
             .filter((project) => project.featured)
             .map((project) => (
@@ -132,9 +113,9 @@ export default function Home() {
               </Link>
             ))}
         </div>
-      </section>
+        </section>
 
-      <section id="latest-blog-posts" className="space-y-6">
+        <section className="space-y-6">
         <div>
           <h2 className="text-xl font-semibold text-neutral-50">
             Latest Blog Posts
@@ -180,7 +161,8 @@ export default function Home() {
             ))}
           </div>
         )}
-      </section>
+        </section>
+      </div>
     </main>
   );
 }
