@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { projects } from "../../data/projects";
-
-const posts: { title: string; date: string; summary: string }[] = [];
+import { getAllPosts } from "../lib/posts";
 
 export default function Home() {
+  const posts = getAllPosts().slice(0, 2); // Show latest 2 posts
   return (
     <main className="flex flex-col gap-16">
       <header className="space-y-6">
@@ -150,21 +150,33 @@ export default function Home() {
         ) : (
           <div className="grid gap-4">
             {posts.map((post) => (
-              <article
-                key={post.title}
-                className="flex flex-col gap-2 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-5 transition hover:border-sky-400/40 hover:bg-neutral-900/60"
+              <Link
+                key={post.slug}
+                href={`/blogs/${post.slug}`}
+                className="group block"
               >
-                <div className="flex items-center justify-between text-sm text-neutral-400">
-                  <span>{post.date}</span>
-                  <span className="rounded-full bg-neutral-800 px-3 py-1 text-xs text-neutral-200">
-                    Article
-                  </span>
-                </div>
-                <h3 className="text-lg font-semibold text-neutral-50">
-                  {post.title}
-                </h3>
-                <p className="text-sm text-neutral-300">{post.summary}</p>
-              </article>
+                <article className="flex flex-col gap-2 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-5 transition group-hover:border-sky-400/40 group-hover:bg-neutral-900/60">
+                  <div className="flex items-center justify-between text-sm text-neutral-400">
+                    <span>{post.date}</span>
+                    <span className="rounded-full bg-neutral-800 px-3 py-1 text-xs text-neutral-200">
+                      Article
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-neutral-50 group-hover:text-sky-200">
+                    {post.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {post.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-neutral-700 px-2 py-1 text-xs text-neutral-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
         )}
