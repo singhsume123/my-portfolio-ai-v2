@@ -53,7 +53,7 @@ export function getAllPosts(): PostMeta[] {
   }
 }
 
-export function getPostBySlug(slug: string): Post | null {
+export async function getPostBySlug(slug: string): Promise<Post | null> {
   try {
     const fullPath = path.join(postsDirectory, `${slug}.mdx`);
     
@@ -72,7 +72,7 @@ export function getPostBySlug(slug: string): Post | null {
       substackUrl: data.substackUrl || '',
     };
 
-    const html = marked(content);
+    const html = await marked(content);
 
     return {
       meta,
