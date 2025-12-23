@@ -77,13 +77,15 @@ export default function Home() {
           {projects
             .filter((project) => project.featured)
             .map((project) => (
-              <article
+              <Link
                 key={project.slug}
-                className="flex flex-col gap-4 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 transition hover:-translate-y-1 hover:border-sky-400/40 hover:bg-neutral-900/60"
+                href={`/projects/${project.slug}`}
+                className="group block"
               >
+                <article className="flex flex-col gap-4 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 transition group-hover:-translate-y-1 group-hover:border-sky-400/40 group-hover:bg-neutral-900/60">
                 <div className="flex items-start justify-between gap-3">
                   <div className="space-y-2">
-                    <h3 className="text-lg font-semibold text-neutral-50">
+                    <h3 className="text-lg font-semibold text-neutral-50 group-hover:text-sky-200">
                       {project.title}
                     </h3>
                     <p className="text-sm text-neutral-300">
@@ -135,7 +137,8 @@ export default function Home() {
                     )}
                   </div>
                 )}
-              </article>
+                </article>
+              </Link>
             ))}
         </div>
       </section>
