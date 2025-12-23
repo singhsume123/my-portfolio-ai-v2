@@ -112,28 +112,19 @@ export default function Home() {
                   project.links.writeup) && (
                   <div className="flex flex-wrap gap-3 text-sm">
                     {project.links.demo && (
-                      <Link
-                        href={project.links.demo}
-                        className="rounded-full border border-neutral-700 px-4 py-2 text-neutral-200 transition hover:border-sky-400 hover:text-sky-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
-                      >
-                        Demo
-                      </Link>
+                      <span className="rounded-full border border-neutral-700 px-4 py-2 text-neutral-200">
+                        Demo Available
+                      </span>
                     )}
                     {project.links.github && (
-                      <Link
-                        href={project.links.github}
-                        className="rounded-full border border-neutral-700 px-4 py-2 text-neutral-200 transition hover:border-sky-400 hover:text-sky-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
-                      >
-                        GitHub
-                      </Link>
+                      <span className="rounded-full border border-neutral-700 px-4 py-2 text-neutral-200">
+                        Open Source
+                      </span>
                     )}
                     {project.links.writeup && (
-                      <Link
-                        href={project.links.writeup}
-                        className="rounded-full border border-neutral-700 px-4 py-2 text-neutral-200 transition hover:border-sky-400 hover:text-sky-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
-                      >
-                        Writeup
-                      </Link>
+                      <span className="rounded-full border border-neutral-700 px-4 py-2 text-neutral-200">
+                        Case Study
+                      </span>
                     )}
                   </div>
                 )}
