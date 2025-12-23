@@ -18,12 +18,6 @@ export const metadata: Metadata = {
   description: "Portfolio for Sumeet Singh Arora",
 };
 
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/blogs", label: "Blogs" },
-  { href: "/about", label: "About" },
-];
 
 export default function RootLayout({
   children,
@@ -39,21 +33,13 @@ export default function RootLayout({
       >
         <div className="flex min-h-screen flex-col">
           <header className="border-b border-neutral-800 bg-neutral-950/90 backdrop-blur">
-            <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-4 px-6 py-4">
-              <nav aria-label="Main navigation">
-                <ul className="flex flex-wrap items-center gap-3 text-sm font-medium text-neutral-200">
-                  {navItems.map((item) => (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        className="rounded-full px-4 py-2 transition hover:bg-neutral-800 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+            <div className="mx-auto flex max-w-5xl items-center px-6 py-4">
+              <Link
+                href="/"
+                className="text-xl font-bold text-neutral-50 hover:text-sky-300 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+              >
+                ⌂
+              </Link>
             </div>
           </header>
 
