@@ -1,13 +1,5 @@
 import Link from "next/link";
-
-const projects = [
-  {
-    title: "AI-Powered Portfolio",
-    description:
-      "An interactive portfolio experience that showcases work using AI-driven summaries and tailored content.",
-    tech: ["Next.js", "Tailwind", "OpenAI"],
-  },
-];
+import { projects } from "../../data/projects";
 
 const posts: { title: string; date: string; summary: string }[] = [];
 
@@ -82,32 +74,69 @@ export default function Home() {
           </div>
         </div>
         <div className="grid gap-6 md:grid-cols-2">
-          {projects.map((project) => (
-            <article
-              key={project.title}
-              className="flex flex-col gap-4 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 transition hover:-translate-y-1 hover:border-sky-400/40 hover:bg-neutral-900/60"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <h3 className="text-lg font-semibold text-neutral-50">
-                  {project.title}
-                </h3>
-                <span className="rounded-full bg-sky-500/20 px-3 py-1 text-xs font-semibold text-sky-200">
-                  Case Study
-                </span>
-              </div>
-              <p className="text-sm text-neutral-300">{project.description}</p>
-              <div className="flex flex-wrap gap-2">
-                {project.tech.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-200"
-                  >
-                    {tag}
+          {projects
+            .filter((project) => project.featured)
+            .map((project) => (
+              <article
+                key={project.slug}
+                className="flex flex-col gap-4 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 transition hover:-translate-y-1 hover:border-sky-400/40 hover:bg-neutral-900/60"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-semibold text-neutral-50">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm text-neutral-300">
+                      {project.oneLiner || project.description}
+                    </p>
+                  </div>
+                  <span className="rounded-full bg-sky-500/20 px-3 py-1 text-xs font-semibold text-sky-200">
+                    Featured
                   </span>
-                ))}
-              </div>
-            </article>
-          ))}
+                </div>
+                <p className="text-sm text-neutral-300">{project.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {project.stack.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-200"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                {(project.links.github ||
+                  project.links.demo ||
+                  project.links.writeup) && (
+                  <div className="flex flex-wrap gap-3 text-sm">
+                    {project.links.demo && (
+                      <Link
+                        href={project.links.demo}
+                        className="rounded-full border border-neutral-700 px-4 py-2 text-neutral-200 transition hover:border-sky-400 hover:text-sky-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+                      >
+                        Demo
+                      </Link>
+                    )}
+                    {project.links.github && (
+                      <Link
+                        href={project.links.github}
+                        className="rounded-full border border-neutral-700 px-4 py-2 text-neutral-200 transition hover:border-sky-400 hover:text-sky-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+                      >
+                        GitHub
+                      </Link>
+                    )}
+                    {project.links.writeup && (
+                      <Link
+                        href={project.links.writeup}
+                        className="rounded-full border border-neutral-700 px-4 py-2 text-neutral-200 transition hover:border-sky-400 hover:text-sky-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+                      >
+                        Writeup
+                      </Link>
+                    )}
+                  </div>
+                )}
+              </article>
+            ))}
         </div>
       </section>
 
@@ -120,25 +149,31 @@ export default function Home() {
             Writing on process, systems, and experiments.
           </p>
         </div>
-        <div className="grid gap-4">
-          {posts.map((post) => (
-            <article
-              key={post.title}
-              className="flex flex-col gap-2 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-5 transition hover:border-sky-400/40 hover:bg-neutral-900/60"
-            >
-              <div className="flex items-center justify-between text-sm text-neutral-400">
-                <span>{post.date}</span>
-                <span className="rounded-full bg-neutral-800 px-3 py-1 text-xs text-neutral-200">
-                  Article
-                </span>
-              </div>
-              <h3 className="text-lg font-semibold text-neutral-50">
-                {post.title}
-              </h3>
-              <p className="text-sm text-neutral-300">{post.summary}</p>
-            </article>
-          ))}
-        </div>
+        {posts.length === 0 ? (
+          <div className="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-5 text-neutral-300">
+            Coming soon — writing on engineering, AI, and product craft.
+          </div>
+        ) : (
+          <div className="grid gap-4">
+            {posts.map((post) => (
+              <article
+                key={post.title}
+                className="flex flex-col gap-2 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-5 transition hover:border-sky-400/40 hover:bg-neutral-900/60"
+              >
+                <div className="flex items-center justify-between text-sm text-neutral-400">
+                  <span>{post.date}</span>
+                  <span className="rounded-full bg-neutral-800 px-3 py-1 text-xs text-neutral-200">
+                    Article
+                  </span>
+                </div>
+                <h3 className="text-lg font-semibold text-neutral-50">
+                  {post.title}
+                </h3>
+                <p className="text-sm text-neutral-300">{post.summary}</p>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );

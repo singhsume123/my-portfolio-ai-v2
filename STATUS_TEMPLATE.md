@@ -3,12 +3,12 @@
 
 ## Completed
 - [ ] Step 0 — Baseline sanity check
-- [ ] Step 1 — Global layout + navigation
-- [ ] Step 2 — Home page
-- [ ] Step 3 — Projects data model
+- [x] Step 1 — Global layout + navigation
+- [x] Step 2 — Home page
+- [x] Step 3 — Projects data model
 - [ ] Step 4 — Projects list page
 - [ ] Step 5 — Project case study page
-- [ ] Step 6 — About page
+- [x] Step 6 — About page
 - [ ] Step 7 — MDX support
 - [ ] Step 8 — Sample posts
 - [ ] Step 9 — lib/posts.ts
@@ -20,9 +20,9 @@
 - [ ] Step 15 — Deployment (Vercel)
 
 ## Next 3 tasks
-1.
-2.
-3.
+1. Step 4 — Projects list page
+2. Step 5 — Project case study page
+3. Step 7 — MDX support
 
 ## Notes / decisions
 - Website is canonical; Substack is distribution.
