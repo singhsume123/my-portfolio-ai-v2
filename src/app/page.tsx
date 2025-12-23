@@ -14,10 +14,11 @@ export default function Home() {
           <h1 className="text-4xl font-semibold leading-tight text-neutral-50 sm:text-5xl">
             Sumeet Singh Arora
           </h1>
+          <p className="text-xl text-neutral-200 font-medium">
+            Computer science as a way of thinking
+          </p>
           <p className="text-lg text-neutral-300 sm:max-w-2xl">
-            Building thoughtful digital experiences across product, design, and
-            AI. I blend systems thinking with hands-on execution to ship work
-            that feels deliberate and useful.
+            Essays, projects, and experiments on mental models, systems, and AI—focused on how engineers reason about complex software.
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
