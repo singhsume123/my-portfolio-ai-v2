@@ -33,9 +33,9 @@ export default function RootLayout({
   const year = new Date().getFullYear();
 
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-neutral-950 text-neutral-50 antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-neutral-950 text-neutral-50 antialiased h-full`}
       >
         <div className="flex min-h-screen flex-col">
           <header className="border-b border-neutral-800 bg-neutral-950/90 backdrop-blur">
@@ -65,7 +65,7 @@ export default function RootLayout({
             </div>
           </header>
 
-          <main className="flex-1 bg-neutral-950">
+          <main className="flex-1 bg-neutral-950 min-h-screen">
             <div className="mx-auto max-w-5xl px-6 py-12 sm:py-16">
               {children}
             </div>
