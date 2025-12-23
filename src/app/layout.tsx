@@ -36,9 +36,9 @@ export default function RootLayout({
             <div className="mx-auto flex max-w-5xl items-center px-6 py-4">
               <Link
                 href="/"
-                className="text-xl font-bold text-neutral-50 hover:text-sky-300 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+                className="text-sm font-medium text-neutral-200 hover:text-sky-300 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
               >
-                ⌂
+                Home
               </Link>
             </div>
           </header>
