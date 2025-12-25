@@ -20,7 +20,7 @@ This first step deliberately avoids AI. It focuses on **structure**.
 
 ## Context: What is Perfetto? 🧩
 
-**Perfetto** is a system-wide tracing and performance analysis platform developed at Google.
+**[Perfetto](https://perfetto.dev/)** is a system-wide tracing and performance analysis platform developed at Google.
 
 It records time-based events across the entire system—CPU scheduling, threads, frames, I/O, and app-defined markers—and places them on a unified timeline.
 
@@ -78,7 +78,7 @@ That's exactly what was automated first in this project.
 
 ## What I Built (Part 1) 🛠️
 
-A minimal Python CLI that reads a mobile app performance trace captured with Perfetto and produces a structured JSON summary.
+A minimal [Python CLI](https://github.com/singhsume123/perfetto-agent) that reads a mobile app performance trace captured with Perfetto and produces a structured JSON summary.
 
 No ML. No dashboards. Just a baseline analyzer that extracts human-meaningful signals from mobile performance traces.
 
@@ -139,7 +139,7 @@ That last point matters — future AI layers depend on **stable structure**.
 
 ## Generating Traces: The TraceToy App 📱
 
-To make iteration easy, a tiny Jetpack Compose test app was built that intentionally creates recognizable mobile app performance signals:
+To make iteration easy, a tiny [Jetpack Compose test app](https://github.com/singhsume123?tab=repositories) was built that intentionally creates recognizable mobile app performance signals:
 
 - simulated startup work
 - a button that deliberately stalls the UI thread
@@ -148,6 +148,8 @@ To make iteration easy, a tiny Jetpack Compose test app was built that intention
 - explicit Trace.beginSection / endSection markers
 
 This makes mobile app performance traces **predictable** and **interpretable**, which is essential when building analysis tools.
+
+![TraceToy app screenshot](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa927da2a-0952-46ec-b65f-4842b9d2929a_996x2048.png)
 
 ## Assumptions and Limitations (By Design) ⚠️
 
