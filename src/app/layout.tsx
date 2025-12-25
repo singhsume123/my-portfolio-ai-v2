@@ -29,10 +29,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-white text-neutral-900 antialiased h-full`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-neutral-50 text-neutral-900 antialiased h-full`}
       >
         <div className="flex min-h-screen flex-col">
-          <header className="border-b border-neutral-200 bg-white/90 backdrop-blur">
+          <header className="border-b border-neutral-200 bg-neutral-50/90 backdrop-blur">
             <div className="mx-auto flex max-w-5xl items-center px-6 py-4">
               <Link
                 href="/"
@@ -43,13 +43,13 @@ export default function RootLayout({
             </div>
           </header>
 
-          <main className="flex-1 bg-white min-h-screen">
+          <main className="flex-1 bg-neutral-50 min-h-screen">
             <div className="mx-auto max-w-5xl px-6 py-12 sm:py-16">
               {children}
             </div>
           </main>
 
-          <footer className="border-t border-neutral-200 bg-white/90 backdrop-blur">
+          <footer className="border-t border-neutral-200 bg-neutral-50/90 backdrop-blur">
             <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6 text-sm text-neutral-500">
               <span>© {year} Sumeet Singh Arora</span>
               <span className="text-neutral-400">Crafted with care.</span>

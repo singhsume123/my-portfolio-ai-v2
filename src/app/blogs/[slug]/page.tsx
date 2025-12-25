@@ -80,7 +80,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         )}
 
         {post.meta.substackUrl && (
-          <div className="mb-8 rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
+          <div className="mb-8 rounded-2xl border border-neutral-200 bg-white p-4">
             <Link
               href={post.meta.substackUrl}
               target="_blank"
@@ -104,7 +104,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             [&>li]:mb-2
             [&>strong]:text-neutral-900 [&>strong]:font-semibold
             [&>code]:text-blue-700 [&>code]:bg-neutral-100 [&>code]:px-1 [&>code]:py-0.5 [&>code]:rounded
-            [&>pre]:bg-neutral-50 [&>pre]:border [&>pre]:border-neutral-200 [&>pre]:rounded-lg [&>pre]:p-4 [&>pre]:mb-6 [&>pre]:overflow-x-auto
+            [&>pre]:bg-white [&>pre]:border [&>pre]:border-neutral-200 [&>pre]:rounded-lg [&>pre]:p-4 [&>pre]:mb-6 [&>pre]:overflow-x-auto
             [&>pre>code]:text-neutral-600 [&>pre>code]:bg-transparent [&>pre>code]:p-0
           "
           dangerouslySetInnerHTML={{ __html: post.html }}

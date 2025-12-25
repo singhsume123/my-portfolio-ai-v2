@@ -14,7 +14,7 @@ export default function BlogPage() {
       </div>
 
       {posts.length === 0 ? (
-        <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-8 text-center">
+        <div className="rounded-2xl border border-neutral-200 bg-white p-8 text-center">
           <h2 className="mb-2 text-xl font-semibold text-neutral-900">
             No posts yet
           </h2>
@@ -30,7 +30,7 @@ export default function BlogPage() {
               href={`/blogs/${post.slug}`}
               className="group block"
             >
-              <article className="rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition group-hover:-translate-y-1 group-hover:border-blue-400 group-hover:bg-neutral-100">
+              <article className="rounded-2xl border border-neutral-200 bg-white p-8 transition group-hover:-translate-y-1 group-hover:border-blue-400 group-hover:bg-neutral-100">
                 <div className="mb-4 flex items-center justify-between">
                   <time className="text-sm text-neutral-500">{post.date}</time>
                   <span className="rounded-full bg-neutral-200 px-3 py-1 text-xs text-neutral-700">

@@ -128,7 +128,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <h2 className="mb-6 text-2xl font-semibold text-neutral-900">
               Problem
             </h2>
-            <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
+            <div className="rounded-2xl border border-neutral-200 bg-white p-6">
               <p className="text-neutral-600 leading-relaxed">
                 {project.slug === "android-perf-oss" && 
                   "Android apps struggle with performance visibility. Traditional monitoring tools capture crashes and ANRs but miss critical user experience metrics like Time to First Render (TTFR) and Time to Interactive (TTI). Worse, there's no connection between performance drops and user behavior like navigation cancellations or feature abandonment."
@@ -151,7 +151,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               {project.highlights.map((highlight, index) => (
                 <div
                   key={index}
-                  className="flex gap-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-6"
+                  className="flex gap-4 rounded-2xl border border-neutral-200 bg-white p-6"
                 >
                   <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-700">
                     {index + 1}
@@ -166,7 +166,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <h2 className="mb-6 text-2xl font-semibold text-neutral-900">
               Results
             </h2>
-            <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
+            <div className="rounded-2xl border border-neutral-200 bg-white p-6">
               <p className="text-neutral-600 leading-relaxed">
                 {project.slug === "android-perf-oss" && 
                   "Delivered a lightweight library that captures critical render metrics with minimal overhead. Teams can now correlate performance drops with specific user journeys, enabling data-driven optimization decisions. The pluggable architecture supports custom instrumentation while maintaining compatibility with existing observability stacks."
@@ -185,7 +185,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <h2 className="mb-6 text-2xl font-semibold text-neutral-900">
               What I'd Do Next
             </h2>
-            <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
+            <div className="rounded-2xl border border-neutral-200 bg-white p-6">
               <p className="text-neutral-600 leading-relaxed">
                 {project.slug === "android-perf-oss" && 
                   "Add real-time alerting for performance regressions, expand trace correlation with business metrics, and build dashboard templates for common performance KPIs. Consider integrating with A/B testing frameworks to measure performance impact on user behavior."
@@ -210,7 +210,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               {project.stack.map((tech) => (
                 <div
                   key={tech}
-                  className="rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm text-neutral-700"
+                  className="rounded-lg border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-700"
                 >
                   {tech}
                 </div>
@@ -242,7 +242,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     href={project.links.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm text-neutral-700 transition hover:border-blue-500 hover:text-blue-700"
+                    className="block rounded-lg border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-700 transition hover:border-blue-500 hover:text-blue-700"
                   >
                     Live Demo ↗
                   </Link>
@@ -252,7 +252,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     href={project.links.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm text-neutral-700 transition hover:border-blue-500 hover:text-blue-700"
+                    className="block rounded-lg border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-700 transition hover:border-blue-500 hover:text-blue-700"
                   >
                     Source Code ↗
                   </Link>
@@ -262,7 +262,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     href={project.links.writeup}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm text-neutral-700 transition hover:border-blue-500 hover:text-blue-700"
+                    className="block rounded-lg border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-700 transition hover:border-blue-500 hover:text-blue-700"
                   >
                     Technical Writeup ↗
                   </Link>

@@ -27,7 +27,7 @@ export default function ProjectsPage() {
                 href={`/projects/${project.slug}`}
                 className="group block"
               >
-                <article className="flex h-full flex-col gap-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 transition group-hover:-translate-y-1 group-hover:border-blue-400 group-hover:bg-neutral-100">
+                <article className="flex h-full flex-col gap-4 rounded-2xl border border-neutral-200 bg-white p-6 transition group-hover:-translate-y-1 group-hover:border-blue-400 group-hover:bg-neutral-100">
                   <div className="flex items-start justify-between gap-3">
                     <div className="space-y-2">
                       <h3 className="text-lg font-semibold text-neutral-900 group-hover:text-blue-700">
@@ -105,7 +105,7 @@ export default function ProjectsPage() {
                 href={`/projects/${project.slug}`}
                 className="group block"
               >
-                <article className="flex h-full flex-col gap-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 transition group-hover:-translate-y-1 group-hover:border-blue-400 group-hover:bg-neutral-100">
+                <article className="flex h-full flex-col gap-4 rounded-2xl border border-neutral-200 bg-white p-6 transition group-hover:-translate-y-1 group-hover:border-blue-400 group-hover:bg-neutral-100">
                   <div className="space-y-2">
                     <h3 className="text-lg font-semibold text-neutral-900 group-hover:text-blue-700">
                       {project.title}

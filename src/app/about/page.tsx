@@ -21,7 +21,7 @@ export default function AboutPage() {
         </p>
       </header>
 
-      <section className="space-y-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-8">
+      <section className="space-y-4 rounded-2xl border border-neutral-200 bg-white p-8">
         <h2 className="text-2xl font-semibold text-neutral-900">What I do</h2>
         <p className="text-neutral-600">
           I design and ship systems that keep large-scale Android apps fast,
@@ -36,7 +36,7 @@ export default function AboutPage() {
         </p>
       </section>
 
-      <section className="grid gap-6 rounded-2xl border border-neutral-200 bg-neutral-50 p-8 sm:grid-cols-2">
+      <section className="grid gap-6 rounded-2xl border border-neutral-200 bg-white p-8 sm:grid-cols-2">
         <div className="space-y-3">
           <h3 className="text-xl font-semibold text-neutral-900">AI for Quality</h3>
           <p className="text-neutral-600">
@@ -55,7 +55,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="space-y-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-8">
+      <section className="space-y-4 rounded-2xl border border-neutral-200 bg-white p-8">
         <h2 className="text-2xl font-semibold text-neutral-900">Community</h2>
         <p className="text-neutral-600">
           I regularly serve as a hackathon judge and participate on program

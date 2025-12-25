@@ -64,7 +64,7 @@ export default function Home() {
                 href={`/projects/${project.slug}`}
                 className="group block"
               >
-                <article className="flex flex-col gap-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 transition group-hover:-translate-y-1 group-hover:border-blue-400 group-hover:bg-neutral-100">
+                <article className="flex flex-col gap-4 rounded-2xl border border-neutral-200 bg-white p-6 transition group-hover:-translate-y-1 group-hover:border-blue-400 group-hover:bg-neutral-100">
                 <div className="flex items-start justify-between gap-3">
                   <div className="space-y-2">
                     <h3 className="text-lg font-semibold text-neutral-900 group-hover:text-blue-700">
@@ -126,7 +126,7 @@ export default function Home() {
           </p>
         </div>
         {posts.length === 0 ? (
-          <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-5 text-neutral-600">
+          <div className="rounded-2xl border border-neutral-200 bg-white p-5 text-neutral-600">
             Coming soon — writing on engineering, AI, and product craft.
           </div>
         ) : (
@@ -137,7 +137,7 @@ export default function Home() {
                 href={`/blogs/${post.slug}`}
                 className="group block"
               >
-                <article className="flex flex-col gap-2 rounded-2xl border border-neutral-200 bg-neutral-50 p-5 transition group-hover:border-blue-400 group-hover:bg-neutral-100">
+                <article className="flex flex-col gap-2 rounded-2xl border border-neutral-200 bg-white p-5 transition group-hover:border-blue-400 group-hover:bg-neutral-100">
                   <div className="flex items-center justify-between text-sm text-neutral-500">
                     <span>{post.date}</span>
                     <span className="rounded-full bg-neutral-200 px-3 py-1 text-xs text-neutral-700">
