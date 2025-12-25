@@ -1,0 +1,235 @@
+---
+title: "Making Performance Traces Attributable"
+date: "2024-12-25"
+slug: "making-performance-traces-attributable"
+tags: ["Android", "Performance", "Perfetto", "Mobile", "Observability"]
+substackUrl: "https://sumeetarora.substack.com/p/making-performance-traces-attributable"
+---
+
+# Making Performance Traces Attributable 🧭
+
+This is **Part 2** of a series on mobile app performance analysis. Part 1 focused on making Perfetto traces human-readable. Part 2 adds **attribution**: identifying *who* performed the work in a trace.
+
+## Why Attribution Matters ⚙️
+
+In Part 1, we extracted summary signals from performance traces:
+
+- startup time
+- long tasks
+- frame counts
+
+But these summaries lack **attribution**.
+
+When an engineer sees "304 long tasks on the UI thread," the immediate questions are:
+
+- Which tasks belong to my app vs. the system?
+- What was the main thread doing during this delay?
+- Is this app code or framework code?
+
+Without attribution, engineers spend time reconstructing execution paths manually.
+
+Part 2 reduces that mental overhead by making traces **attributable** — structured data that clearly identifies process, thread, and source of work.
+
+## Main Thread Detection 🔍
+
+A common question: **"Is the UI thread blocked?"**
+
+The challenge: trace metadata doesn't always label threads explicitly.
+
+The analyzer uses a heuristic approach:
+
+1. Look for a thread named `"main"`
+2. If not found, fall back to `tid == pid` (on Android, this typically identifies the main thread)
+
+This isn't perfect, but it's **explicit** and **documented** in the output.
+
+```python
+def find_main_thread(pid: int, threads: list) -> int | None:
+    # Try to find thread named "main"
+    for thread in threads:
+        if thread.name == "main":
+            return thread.tid
+
+    # Fallback: main thread often has tid == pid
+    return pid if any(t.tid == pid for t in threads) else None
+```
+
+## Focus Process Feature 🎯
+
+Device-wide traces contain noise: system services, background apps, kernel events.
+
+The `--focus-process` flag filters the trace to a specific application:
+
+```bash
+python -m perfetto_agent.cli analyze \
+  --trace file.perfetto-trace \
+  --focus-process com.example.app \
+  --out analysis.json
+```
+
+This shifts the output from **device-wide signals** to **app-specific performance data**.
+
+Now, "304 long tasks" becomes "42 long tasks in your app's main thread."
+
+## Attribution Output Examples 📊
+
+Long tasks now include process, thread, and source identification:
+
+```json
+{
+  "ui_thread_long_tasks": {
+    "threshold_ms": 50,
+    "count": 42,
+    "top": [
+      {
+        "name": "UI#stall_button_click",
+        "dur_ms": 200.1,
+        "pid": 12345,
+        "tid": 12345,
+        "thread_name": "<main-thread>",
+        "process_name": "com.example.tracetoy"
+      }
+    ]
+  }
+}
+```
+
+This tells engineers:
+
+- **Who**: `com.example.tracetoy` main thread
+- **What**: `UI#stall_button_click` (app-defined section)
+- **How long**: 200.1ms
+
+No guesswork. No manual trace inspection.
+
+## App-Defined Sections 🏷️
+
+Android allows developers to instrument code with `Trace.beginSection()` / `Trace.endSection()`:
+
+```kotlin
+Trace.beginSection("UI#stall_button_click")
+// Simulated heavy work
+Thread.sleep(200)
+Trace.endSection()
+```
+
+The analyzer extracts these as **first-class performance metrics**.
+
+This means app-specific work becomes visible in the output:
+
+```json
+{
+  "app_sections": [
+    { "name": "UI#stall_button_click", "dur_ms": 200.1 },
+    { "name": "onCreate", "dur_ms": 45.2 }
+  ]
+}
+```
+
+Engineers now see **which app components dominated execution time** without reconstructing the call stack.
+
+## Frame and CPU Analysis 📈
+
+### Frame Data Enhancement
+
+Frame analysis now includes **percentiles** rather than just totals:
+
+```json
+{
+  "frame_summary": {
+    "total": 412,
+    "janky": 29,
+    "p50_ms": 12.3,
+    "p95_ms": 18.7,
+    "p99_ms": 45.2
+  }
+}
+```
+
+This gives engineers actionable data: "95% of frames render in under 19ms."
+
+### CPU Analysis (With Caveats)
+
+The analyzer aggregates CPU slice data by process and thread:
+
+```json
+{
+  "cpu_summary": {
+    "by_process": [
+      {
+        "process_name": "com.example.tracetoy",
+        "total_cpu_ms": 1234.5,
+        "threads": [
+          { "thread_name": "<main-thread>", "cpu_ms": 856.3 },
+          { "thread_name": "RenderThread", "cpu_ms": 378.2 }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**Important caveat**: This is **not true CPU utilization**. It's aggregated slice duration.
+
+True CPU analysis requires correlating slices with CPU scheduling events — a future improvement.
+
+But even coarse CPU data helps answer: "Did my app spend more time on the main thread or render thread?"
+
+## What This Doesn't Do 🚫
+
+This analyzer explicitly **does not attempt explanation**:
+
+- No causality inference ("X caused Y")
+- No narrative generation ("Your app is slow because...")
+- No intent guessing ("The user was trying to...")
+
+It makes **attribution explicit** — the foundation for future explanation tools.
+
+Part 1 made traces legible. Part 2 makes them attributable.
+
+Part 3 will focus on **explanation** — using structured, attributed data to answer "why."
+
+## Limitations (By Design) ⚠️
+
+This is still a **best-effort analyzer**:
+
+- Main thread detection is heuristic
+- CPU data is coarse
+- Attribution logic will improve over time
+
+All of this is **documented explicitly in the output**.
+
+Engineers get:
+
+- What we know
+- What we don't know
+- How we derived it
+
+No hallucination. No overconfidence.
+
+## What's Next 🔜
+
+Part 3 will focus on **explanation**, including:
+
+- Separating app vs. framework vs. system work
+- Tightening rendering/scheduling attribution
+- Correlating performance with user behavior
+
+But first, the foundation had to be solid:
+
+- **Part 1**: Legible traces (structure)
+- **Part 2**: Attributable traces (ownership)
+- **Part 3**: Explainable traces (causality)
+
+## Links 🔗
+
+- Perfetto analyzer: https://github.com/singhsume123/perfetto-agent
+- TraceToy test app: https://github.com/singhsume123?tab=repositories
+
+## Closing Thought 💭
+
+Attribution is the bridge between raw performance data and actionable insight.
+
+Before explaining **why** something is slow, we need to know **who** did the work.
+
+This post is that bridge.
