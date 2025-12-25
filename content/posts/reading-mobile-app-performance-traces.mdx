@@ -1,0 +1,201 @@
+---
+title: "Reading Mobile App Performance Traces Like a Human"
+date: "2024-12-25"
+slug: "reading-mobile-app-performance-traces"
+tags: ["Android", "Performance", "Perfetto", "Mobile", "AI"]
+substackUrl: "https://sumeetarora.substack.com/p/reading-mobile-app-performance-traces"
+---
+
+# Reading Mobile App Performance Traces Like a Human 🧠
+
+Mobile app performance traces are incredibly powerful — and almost completely unreadable in raw form.
+
+Before adding AI, I wanted to answer a simpler question:
+
+> "How do experienced engineers actually read a mobile app performance trace?"
+
+This post documents **Part 1** of a longer project: building an **AI-assisted performance analysis agent for mobile app performance traces**, using **Android Perfetto**.
+
+This first step deliberately avoids AI. It focuses on **structure**.
+
+## Context: What is Perfetto? 🧩
+
+**Perfetto** is a system-wide tracing and performance analysis platform developed at Google.
+
+It records time-based events across the entire system—CPU scheduling, threads, frames, I/O, and app-defined markers—and places them on a unified timeline.
+
+Perfetto is used across Linux, Chromium, and embedded systems, but it is most commonly associated with **Android**, where it powers deep mobile app performance tracing, including:
+
+- app startup
+- UI thread execution
+- frame rendering (doFrame)
+- Binder calls
+- garbage collection
+- kernel scheduling
+
+All in one trace.
+
+The tradeoff is that mobile app performance traces captured via Perfetto are **dense and overwhelming**. They are powerful, but not designed for direct human consumption.
+
+That gap—between raw performance traces and how engineers actually reason about mobile app performance—is exactly what this project is trying to close.
+
+## Why This Matters ⚙️
+
+Mobile app performance traces contain everything: CPU scheduling, threads, frames, binder calls, GC, app markers.
+
+But when an engineer opens a trace, they don't analyze everything.
+
+They **scan**.
+
+They look for:
+
+- obvious long tasks
+- startup boundaries
+- frame drops
+- suspicious main-thread work
+
+In other words, humans apply a **mental summary layer** before any deep dive.
+
+If I want an AI agent to reason about mobile app performance, the first step isn't intelligence — it's **making performance traces legible**.
+
+## How Humans Read Mobile App Performance Traces 👀
+
+In practice, the first questions are usually:
+
+1. How long is this trace?
+2. Which app process am I looking at?
+3. Did startup take unusually long?
+4. Are there obvious long tasks on the UI thread?
+5. Do frames look healthy or janky?
+
+This first pass is:
+
+- fast
+- heuristic-driven
+- approximate
+
+That's exactly what was automated first in this project.
+
+## What I Built (Part 1) 🛠️
+
+A minimal Python CLI that reads a mobile app performance trace captured with Perfetto and produces a structured JSON summary.
+
+No ML. No dashboards. Just a baseline analyzer that extracts human-meaningful signals from mobile performance traces.
+
+### CLI Usage
+
+```bash
+python -m perfetto_agent.cli analyze \
+  --trace tracetoy_trace.perfetto-trace \
+  --out analysis.json
+```
+
+## The Output Artifact: analysis.json 📄
+
+Here's the shape of the output:
+
+```json
+{
+  "trace_path": "tracetoy_trace.perfetto-trace",
+  "trace_duration_ms": 5123.7,
+  "processes": [
+    { "process_name": "com.example.tracetoy", "pid": 23451 }
+  ],
+  "startup_ms": 1864.2,
+  "ui_thread_long_tasks": {
+    "threshold_ms": 50,
+    "count": 304,
+    "top": [
+      { "name": "<internal slice>", "dur_ms": 16572.1 }
+    ]
+  },
+  "frame_summary": {
+    "total": 412,
+    "janky": 29
+  },
+  "assumptions": {
+    "startup": "best-effort heuristic based on first frame",
+    "long_tasks": "slice duration thresholding; attribution refined later",
+    "frames": "doFrame slices; coarse jank signal"
+  }
+}
+```
+
+A small but important observation:
+
+> "Some long tasks show up with numeric identifiers rather than names."
+
+This is a reminder that raw mobile app performance traces are not designed for humans — structure and attribution matter.
+
+Those numeric identifiers often come from internal or kernel-level slices. At this stage, the analyzer reports them honestly rather than pretending to understand them.
+
+This JSON is intentionally:
+
+- incomplete
+- explicit about uncertainty
+- stable in shape
+
+That last point matters — future AI layers depend on **stable structure**.
+
+## Generating Traces: The TraceToy App 📱
+
+To make iteration easy, a tiny Jetpack Compose test app was built that intentionally creates recognizable mobile app performance signals:
+
+- simulated startup work
+- a button that deliberately stalls the UI thread
+- optional background CPU load
+- a scrolling list to generate frames
+- explicit Trace.beginSection / endSection markers
+
+This makes mobile app performance traces **predictable** and **interpretable**, which is essential when building analysis tools.
+
+## Assumptions and Limitations (By Design) ⚠️
+
+This analyzer is intentionally rough.
+
+- Startup time is a best-effort heuristic
+- Main-thread attribution is incomplete
+- Frame jank is coarse
+
+All of this is documented explicitly in the output.
+
+At this stage, correctness matters less than:
+
+- not crashing
+- not hallucinating
+- being explicit about what we don't know
+
+## Why I Didn't Use AI (Yet) 🤖
+
+It's tempting to jump straight to LLMs.
+
+But without:
+
+- a clean feature layer
+- a stable schema
+- explicit assumptions
+
+AI would only produce confident-sounding nonsense.
+
+This week was about **earning the right** to add intelligence.
+
+## What's Next 🔜
+
+Next, I'll move from a summary to a **feature schema for mobile app performance traces**, including:
+
+- better UI-thread attribution
+- CPU slice aggregation
+- reusable performance features
+
+Only after that does explanation — or AI-driven reasoning — make sense.
+
+## Links 🔗
+
+- Perfetto analyzer: https://github.com/singhsume123/perfetto-agent
+- TraceToy test app: https://github.com/singhsume123?tab=repositories
+
+## Closing Thought 💭
+
+Before teaching machines to reason about **mobile app performance**, we need to be honest about **how humans actually read performance traces**: quickly, heuristically, and with imperfect information.
+
+This post is the first brick in that foundation.
