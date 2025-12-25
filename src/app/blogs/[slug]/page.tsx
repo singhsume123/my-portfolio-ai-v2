@@ -42,7 +42,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <div className="mb-8">
         <Link
           href="/blogs"
-          className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-sky-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+          className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
         >
           ← Back to Blogs
         </Link>
@@ -50,10 +50,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       <header className="mb-12">
         <div className="mb-6">
-          <h1 className="mb-4 text-4xl font-bold text-neutral-50 leading-tight">
+          <h1 className="mb-4 text-4xl font-bold text-neutral-900 leading-tight">
             {post.meta.title}
           </h1>
-          <div className="flex items-center gap-4 text-sm text-neutral-400">
+          <div className="flex items-center gap-4 text-sm text-neutral-500">
             <time dateTime={post.meta.date}>
               {new Date(post.meta.date).toLocaleDateString('en-US', {
                 year: 'numeric',
@@ -71,7 +71,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.meta.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-neutral-700 px-3 py-1 text-sm text-neutral-300"
+                className="rounded-full border border-neutral-300 px-3 py-1 text-sm text-neutral-600"
               >
                 {tag}
               </span>
@@ -80,12 +80,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         )}
 
         {post.meta.substackUrl && (
-          <div className="mb-8 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-4">
+          <div className="mb-8 rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
             <Link
               href={post.meta.substackUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-neutral-300 hover:text-sky-400"
+              className="text-sm text-neutral-600 hover:text-blue-600"
             >
               Also available on Substack →
             </Link>
@@ -93,35 +93,35 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         )}
       </header>
 
-      <article className="prose prose-invert max-w-none">
-        <div 
+      <article className="prose max-w-none">
+        <div
           className="
-            [&>h1]:text-3xl [&>h1]:font-bold [&>h1]:text-neutral-50 [&>h1]:mb-6
-            [&>h2]:text-2xl [&>h2]:font-semibold [&>h2]:text-neutral-50 [&>h2]:mt-12 [&>h2]:mb-4
-            [&>h3]:text-xl [&>h3]:font-medium [&>h3]:text-neutral-50 [&>h3]:mt-8 [&>h3]:mb-3
-            [&>p]:text-neutral-300 [&>p]:leading-relaxed [&>p]:mb-6
-            [&>ul]:text-neutral-300 [&>ul]:mb-6 [&>ul]:ml-6
+            [&>h1]:text-3xl [&>h1]:font-bold [&>h1]:text-neutral-900 [&>h1]:mb-6
+            [&>h2]:text-2xl [&>h2]:font-semibold [&>h2]:text-neutral-900 [&>h2]:mt-12 [&>h2]:mb-4
+            [&>h3]:text-xl [&>h3]:font-medium [&>h3]:text-neutral-900 [&>h3]:mt-8 [&>h3]:mb-3
+            [&>p]:text-neutral-600 [&>p]:leading-relaxed [&>p]:mb-6
+            [&>ul]:text-neutral-600 [&>ul]:mb-6 [&>ul]:ml-6
             [&>li]:mb-2
-            [&>strong]:text-neutral-100 [&>strong]:font-semibold
-            [&>code]:text-sky-300 [&>code]:bg-neutral-800 [&>code]:px-1 [&>code]:py-0.5 [&>code]:rounded
-            [&>pre]:bg-neutral-900 [&>pre]:border [&>pre]:border-neutral-700 [&>pre]:rounded-lg [&>pre]:p-4 [&>pre]:mb-6 [&>pre]:overflow-x-auto
-            [&>pre>code]:text-neutral-300 [&>pre>code]:bg-transparent [&>pre>code]:p-0
+            [&>strong]:text-neutral-900 [&>strong]:font-semibold
+            [&>code]:text-blue-700 [&>code]:bg-neutral-100 [&>code]:px-1 [&>code]:py-0.5 [&>code]:rounded
+            [&>pre]:bg-neutral-50 [&>pre]:border [&>pre]:border-neutral-200 [&>pre]:rounded-lg [&>pre]:p-4 [&>pre]:mb-6 [&>pre]:overflow-x-auto
+            [&>pre>code]:text-neutral-600 [&>pre>code]:bg-transparent [&>pre>code]:p-0
           "
-          dangerouslySetInnerHTML={{ __html: post.html }} 
+          dangerouslySetInnerHTML={{ __html: post.html }}
         />
       </article>
 
-      <footer className="mt-16 border-t border-neutral-800 pt-8">
+      <footer className="mt-16 border-t border-neutral-200 pt-8">
         <div className="flex items-center justify-between">
           <Link
             href="/blogs"
-            className="rounded-full border border-neutral-700 px-6 py-3 text-sm text-neutral-200 transition hover:border-sky-400 hover:text-sky-200"
+            className="rounded-full border border-neutral-300 px-6 py-3 text-sm text-neutral-700 transition hover:border-blue-500 hover:text-blue-700"
           >
             ← More Blogs
           </Link>
           <Link
             href="/about"
-            className="rounded-full border border-neutral-700 px-6 py-3 text-sm text-neutral-200 transition hover:border-sky-400 hover:text-sky-200"
+            className="rounded-full border border-neutral-300 px-6 py-3 text-sm text-neutral-700 transition hover:border-blue-500 hover:text-blue-700"
           >
             About the Author
           </Link>

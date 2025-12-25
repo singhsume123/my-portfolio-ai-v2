@@ -45,7 +45,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <div className="mb-8">
         <Link
           href="/projects"
-          className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-sky-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+          className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
         >
           ← Back to Projects
         </Link>
@@ -54,12 +54,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <header className="mb-12">
         <div className="mb-6 flex items-start justify-between gap-4">
           <div className="space-y-4">
-            <h1 className="text-4xl font-bold text-neutral-50">
+            <h1 className="text-4xl font-bold text-neutral-900">
               {project.title}
             </h1>
-            <p className="text-lg text-neutral-300">{project.oneLiner}</p>
+            <p className="text-lg text-neutral-600">{project.oneLiner}</p>
             {project.featured && (
-              <span className="inline-block rounded-full bg-sky-500/20 px-3 py-1 text-sm font-semibold text-sky-200">
+              <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">
                 Featured Project
               </span>
             )}
@@ -70,7 +70,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           {project.stack.map((tech) => (
             <span
               key={tech}
-              className="rounded-full border border-neutral-700 px-4 py-2 text-sm text-neutral-200"
+              className="rounded-full border border-neutral-300 px-4 py-2 text-sm text-neutral-700"
             >
               {tech}
             </span>
@@ -84,7 +84,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 href={project.links.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full border border-neutral-700 px-6 py-3 text-sm text-neutral-200 transition hover:border-sky-400 hover:text-sky-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+                className="rounded-full border border-neutral-300 px-6 py-3 text-sm text-neutral-700 transition hover:border-blue-500 hover:text-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
                 View Demo ↗
               </Link>
@@ -94,7 +94,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 href={project.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full border border-neutral-700 px-6 py-3 text-sm text-neutral-200 transition hover:border-sky-400 hover:text-sky-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+                className="rounded-full border border-neutral-300 px-6 py-3 text-sm text-neutral-700 transition hover:border-blue-500 hover:text-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
                 View Code ↗
               </Link>
@@ -104,7 +104,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 href={project.links.writeup}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full border border-neutral-700 px-6 py-3 text-sm text-neutral-200 transition hover:border-sky-400 hover:text-sky-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+                className="rounded-full border border-neutral-300 px-6 py-3 text-sm text-neutral-700 transition hover:border-blue-500 hover:text-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
                 Read Writeup ↗
               </Link>
@@ -116,20 +116,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <div className="grid gap-12 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-12">
           <section>
-            <h2 className="mb-6 text-2xl font-semibold text-neutral-50">
+            <h2 className="mb-6 text-2xl font-semibold text-neutral-900">
               Overview
             </h2>
-            <p className="text-neutral-300 leading-relaxed">
+            <p className="text-neutral-600 leading-relaxed">
               {project.description}
             </p>
           </section>
 
           <section>
-            <h2 className="mb-6 text-2xl font-semibold text-neutral-50">
+            <h2 className="mb-6 text-2xl font-semibold text-neutral-900">
               Problem
             </h2>
-            <div className="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6">
-              <p className="text-neutral-300 leading-relaxed">
+            <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
+              <p className="text-neutral-600 leading-relaxed">
                 {project.slug === "android-perf-oss" && 
                   "Android apps struggle with performance visibility. Traditional monitoring tools capture crashes and ANRs but miss critical user experience metrics like Time to First Render (TTFR) and Time to Interactive (TTI). Worse, there's no connection between performance drops and user behavior like navigation cancellations or feature abandonment."
                 }
@@ -144,30 +144,30 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </section>
 
           <section>
-            <h2 className="mb-6 text-2xl font-semibold text-neutral-50">
+            <h2 className="mb-6 text-2xl font-semibold text-neutral-900">
               Approach
             </h2>
             <div className="space-y-6">
               {project.highlights.map((highlight, index) => (
                 <div
                   key={index}
-                  className="flex gap-4 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6"
+                  className="flex gap-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-6"
                 >
-                  <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-sky-500/20 text-xs font-semibold text-sky-200">
+                  <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-700">
                     {index + 1}
                   </span>
-                  <p className="text-neutral-300">{highlight}</p>
+                  <p className="text-neutral-600">{highlight}</p>
                 </div>
               ))}
             </div>
           </section>
 
           <section>
-            <h2 className="mb-6 text-2xl font-semibold text-neutral-50">
+            <h2 className="mb-6 text-2xl font-semibold text-neutral-900">
               Results
             </h2>
-            <div className="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6">
-              <p className="text-neutral-300 leading-relaxed">
+            <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
+              <p className="text-neutral-600 leading-relaxed">
                 {project.slug === "android-perf-oss" && 
                   "Delivered a lightweight library that captures critical render metrics with minimal overhead. Teams can now correlate performance drops with specific user journeys, enabling data-driven optimization decisions. The pluggable architecture supports custom instrumentation while maintaining compatibility with existing observability stacks."
                 }
@@ -182,11 +182,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </section>
 
           <section>
-            <h2 className="mb-6 text-2xl font-semibold text-neutral-50">
+            <h2 className="mb-6 text-2xl font-semibold text-neutral-900">
               What I'd Do Next
             </h2>
-            <div className="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6">
-              <p className="text-neutral-300 leading-relaxed">
+            <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
+              <p className="text-neutral-600 leading-relaxed">
                 {project.slug === "android-perf-oss" && 
                   "Add real-time alerting for performance regressions, expand trace correlation with business metrics, and build dashboard templates for common performance KPIs. Consider integrating with A/B testing frameworks to measure performance impact on user behavior."
                 }
@@ -203,14 +203,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         <aside className="space-y-8">
           <section>
-            <h3 className="mb-4 text-lg font-semibold text-neutral-50">
+            <h3 className="mb-4 text-lg font-semibold text-neutral-900">
               Tech Stack
             </h3>
             <div className="space-y-3">
               {project.stack.map((tech) => (
                 <div
                   key={tech}
-                  className="rounded-lg border border-neutral-800 bg-neutral-900/40 px-4 py-2 text-sm text-neutral-200"
+                  className="rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm text-neutral-700"
                 >
                   {tech}
                 </div>
@@ -219,12 +219,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </section>
 
           <section>
-            <h3 className="mb-4 text-lg font-semibold text-neutral-50">
+            <h3 className="mb-4 text-lg font-semibold text-neutral-900">
               Key Features
             </h3>
             <ul className="space-y-2">
               {project.highlights.map((highlight, index) => (
-                <li key={index} className="text-sm text-neutral-400">
+                <li key={index} className="text-sm text-neutral-600">
                   • {highlight}
                 </li>
               ))}
@@ -233,7 +233,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
           {(project.links.github || project.links.demo || project.links.writeup) && (
             <section>
-              <h3 className="mb-4 text-lg font-semibold text-neutral-50">
+              <h3 className="mb-4 text-lg font-semibold text-neutral-900">
                 Links
               </h3>
               <div className="space-y-2">
@@ -242,7 +242,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     href={project.links.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block rounded-lg border border-neutral-800 bg-neutral-900/40 px-4 py-2 text-sm text-neutral-200 transition hover:border-sky-400 hover:text-sky-200"
+                    className="block rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm text-neutral-700 transition hover:border-blue-500 hover:text-blue-700"
                   >
                     Live Demo ↗
                   </Link>
@@ -252,7 +252,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     href={project.links.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block rounded-lg border border-neutral-800 bg-neutral-900/40 px-4 py-2 text-sm text-neutral-200 transition hover:border-sky-400 hover:text-sky-200"
+                    className="block rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm text-neutral-700 transition hover:border-blue-500 hover:text-blue-700"
                   >
                     Source Code ↗
                   </Link>
@@ -262,7 +262,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     href={project.links.writeup}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block rounded-lg border border-neutral-800 bg-neutral-900/40 px-4 py-2 text-sm text-neutral-200 transition hover:border-sky-400 hover:text-sky-200"
+                    className="block rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm text-neutral-700 transition hover:border-blue-500 hover:text-blue-700"
                   >
                     Technical Writeup ↗
                   </Link>

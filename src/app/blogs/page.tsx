@@ -7,18 +7,18 @@ export default function BlogPage() {
   return (
     <main className="mx-auto max-w-4xl px-6 py-12">
       <div className="mb-12">
-        <h1 className="mb-4 text-4xl font-bold text-neutral-50">Blogs</h1>
-        <p className="text-lg text-neutral-300">
+        <h1 className="mb-4 text-4xl font-bold text-neutral-900">Blogs</h1>
+        <p className="text-lg text-neutral-600">
           Writing on engineering, AI, and product craft.
         </p>
       </div>
 
       {posts.length === 0 ? (
-        <div className="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-8 text-center">
-          <h2 className="mb-2 text-xl font-semibold text-neutral-50">
+        <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-8 text-center">
+          <h2 className="mb-2 text-xl font-semibold text-neutral-900">
             No posts yet
           </h2>
-          <p className="text-neutral-400">
+          <p className="text-neutral-500">
             Posts will appear here once they're published.
           </p>
         </div>
@@ -30,33 +30,33 @@ export default function BlogPage() {
               href={`/blogs/${post.slug}`}
               className="group block"
             >
-              <article className="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-8 transition group-hover:-translate-y-1 group-hover:border-sky-400/40 group-hover:bg-neutral-900/60">
+              <article className="rounded-2xl border border-neutral-200 bg-neutral-50 p-8 transition group-hover:-translate-y-1 group-hover:border-blue-400 group-hover:bg-neutral-100">
                 <div className="mb-4 flex items-center justify-between">
-                  <time className="text-sm text-neutral-400">{post.date}</time>
-                  <span className="rounded-full bg-neutral-800 px-3 py-1 text-xs text-neutral-200">
+                  <time className="text-sm text-neutral-500">{post.date}</time>
+                  <span className="rounded-full bg-neutral-200 px-3 py-1 text-xs text-neutral-700">
                     Article
                   </span>
                 </div>
-                
-                <h2 className="mb-4 text-2xl font-semibold text-neutral-50 group-hover:text-sky-200">
+
+                <h2 className="mb-4 text-2xl font-semibold text-neutral-900 group-hover:text-blue-700">
                   {post.title}
                 </h2>
-                
+
                 {post.tags.length > 0 && (
                   <div className="mb-4 flex flex-wrap gap-2">
                     {post.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full border border-neutral-700 px-3 py-1 text-xs text-neutral-300"
+                        className="rounded-full border border-neutral-300 px-3 py-1 text-xs text-neutral-600"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                 )}
-                
+
                 {post.substackUrl && (
-                  <div className="mt-4 text-sm text-neutral-400">
+                  <div className="mt-4 text-sm text-neutral-500">
                     Also available on Substack →
                   </div>
                 )}
