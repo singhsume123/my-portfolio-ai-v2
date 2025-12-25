@@ -100,8 +100,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             [&>h2]:text-2xl [&>h2]:font-semibold [&>h2]:text-neutral-900 [&>h2]:mt-12 [&>h2]:mb-4
             [&>h3]:text-xl [&>h3]:font-medium [&>h3]:text-neutral-900 [&>h3]:mt-8 [&>h3]:mb-3
             [&>p]:text-neutral-600 [&>p]:leading-relaxed [&>p]:mb-6
-            [&>ul]:text-neutral-600 [&>ul]:mb-6 [&>ul]:ml-6
-            [&>li]:mb-2
+            [&_ul]:text-neutral-600 [&_ul]:mb-6 [&_ul]:ml-8 [&_ul]:list-disc [&_ul]:space-y-2
+            [&_ol]:text-neutral-600 [&_ol]:mb-6 [&_ol]:ml-8 [&_ol]:list-decimal [&_ol]:space-y-2
+            [&_li]:text-neutral-600 [&_li]:leading-relaxed
+            [&>blockquote]:border-l-4 [&>blockquote]:border-blue-500 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-neutral-600 [&>blockquote]:my-6
             [&>strong]:text-neutral-900 [&>strong]:font-semibold
             [&>code]:text-blue-700 [&>code]:bg-neutral-100 [&>code]:px-1 [&>code]:py-0.5 [&>code]:rounded
             [&>pre]:bg-white [&>pre]:border [&>pre]:border-neutral-200 [&>pre]:rounded-lg [&>pre]:p-4 [&>pre]:mb-6 [&>pre]:overflow-x-auto
