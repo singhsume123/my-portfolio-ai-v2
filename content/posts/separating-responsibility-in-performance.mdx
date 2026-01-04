@@ -1,0 +1,242 @@
+---
+title: "Separating Responsibility in Performance Traces"
+date: "2026-01-01"
+slug: "separating-responsibility-in-performance"
+tags: ["Android", "Performance", "Perfetto", "Mobile", "Observability"]
+substackUrl: "https://sumeetarora.substack.com/p/separating-responsibility-in-performance"
+---
+
+# Separating responsibility in performance traces ⚖️
+
+![Performance trace responsibility](https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4513588b-8543-46a0-85e1-641b2b71bdea_1024x608.png)
+
+In **Part 2**, I focused on attribution:
+figuring out **which process and thread** did the work.
+
+That unlocked an important question I couldn't ignore anymore:
+
+> When my app is slow,
+> how much of that work is actually *mine*?
+
+Part 3 is about responsibility.
+
+---
+
+## The uncomfortable truth about performance 🧠
+
+Every mobile engineer has felt this moment:
+
+- the UI thread is blocked
+- frames are janky
+- startup is slow
+
+…and the trace looks terrifying.
+
+But traces don't care about blame.
+
+They happily mix together:
+
+- your app code
+- Android framework internals
+- system and kernel activity
+
+Without separating those, it's easy to draw the wrong conclusions.
+
+Part 3 is about making that separation explicit.
+
+---
+
+## From "who did the work" to "what kind of work it was" 🧭
+
+At the end of Part 2, the analyzer could already say:
+
+- which slices came from my app process
+- which thread they ran on
+- which app-defined sections dominated
+
+But everything still lived in one bucket.
+
+So in Part 3, I added a **deterministic classification layer** on top of that attribution.
+
+Each slice is now labeled as one of:
+
+- 🟢 **app** — work originating from app-defined sections
+- 🔵 **framework** — Android UI / rendering / framework internals
+- 🔴 **system** — scheduler, binder, SurfaceFlinger, kernel-level work
+- ⚪ **unknown** — when we can't be confident
+
+No AI.
+No guessing.
+Just rules.
+
+---
+
+## Classification is conservative (on purpose) 🧪
+
+This part matters.
+
+The classifier is intentionally **boring**:
+
+- based on pid
+- based on thread ownership
+- based on small, explicit name-token rules
+
+If a slice doesn't clearly belong to a category, it becomes `"unknown"`.
+
+That's not a failure — it's honesty.
+
+---
+
+## Long tasks, now with responsibility labels 🧵
+
+Here's what a long slice looks like now:
+
+```json
+{
+  "name": "UI#stall_button_click",
+  "dur_ms": 200.1,
+  "pid": 12345,
+  "tid": 12345,
+  "thread_name": "<main-thread>",
+  "process_name": "com.example.tracetoy",
+  "category": "app"
+}
+```
+
+And a framework-heavy one:
+
+```json
+{
+  "name": "Choreographer#doFrame",
+  "dur_ms": 450.3,
+  "pid": 12345,
+  "tid": 12345,
+  "thread_name": "<main-thread>",
+  "process_name": "com.example.tracetoy",
+  "category": "framework"
+}
+```
+
+Same trace.
+Very different implications.
+
+---
+
+## Aggregates that change how you read traces 📊
+
+Instead of eyeballing hundreds of slices, the analyzer now computes:
+
+```json
+"work_breakdown": {
+  "by_category_ms": {
+    "app": 420.3,
+    "framework": 1320.5,
+    "system": 310.2,
+    "unknown": 55.1
+  }
+}
+```
+
+This single block answers a powerful question:
+
+> Is this performance problem primarily app-owned?
+
+Sometimes the answer is uncomfortable.
+Sometimes it's relieving.
+
+Either way, it's grounded.
+
+---
+
+## Main thread blocking: who's responsible? 🚦
+
+The analyzer now breaks down main-thread blocking by category:
+
+```json
+"main_thread_blocking": {
+  "app_ms": 180.2,
+  "framework_ms": 640.1,
+  "system_ms": 95.0,
+  "unknown_ms": 22.3
+}
+```
+
+If framework dominates main-thread blocking, optimizing your app code alone won't fix the issue.
+
+This doesn't assign blame — it just makes responsibility visible.
+
+---
+
+## Summary output (quick orientation) 🧭
+
+The analyzer now includes a summary block upfront:
+
+```json
+"summary": {
+  "dominant_work_category": "framework",
+  "main_thread_blocked_by": "framework",
+  "app_sections_found": 3
+}
+```
+
+This gives you directional signals before diving into the details.
+
+Not explanations.
+Not blame.
+Just orientation.
+
+---
+
+## What this does NOT do 🚫
+
+This classification system explicitly **does not**:
+
+- assign responsibility or blame
+- generate recommendations
+- claim causality
+- interpret developer intent
+
+It simply makes responsibility **visible** through deterministic analysis.
+
+---
+
+## What's next (Part 4) 🔮
+
+In Part 4, I want to address **timing**:
+
+> When did this work actually *matter*?
+
+This means:
+
+- separating startup vs steady-state windows
+- identifying which execution phases are performance-critical
+- correlating work with user-visible impact
+
+Still no AI.
+Still deterministic.
+
+Only after that does it make sense to ask:
+
+> Can an agent help explain *why* performance regressed?
+
+---
+
+## Links 🔗
+
+- Perfetto analyzer (Part 3): https://github.com/singhsume123/perfetto-agent
+- Example outputs with responsibility classification in the repo
+- TraceToy test app: https://github.com/singhsume123?tab=repositories
+
+---
+
+## Closing thought 💭
+
+Performance debugging isn't about blame.
+
+It's about building an accurate mental model of **who** did **what kind of work**, **where**, and **when**.
+
+Part 1 made traces readable.
+Part 2 made them attributable.
+Part 3 makes them separable by responsibility.
+
+That's the foundation.
