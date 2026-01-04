@@ -202,22 +202,15 @@ It simply makes responsibility **visible** through deterministic analysis.
 
 ## What's next (Part 4) 🔮
 
-In Part 4, I want to address **timing**:
+In **Part 4**, I want to answer a different question:
 
-> When did this work actually *matter*?
+> _When_ did this work actually matter?
 
-This means:
+That means:
 
-- separating startup vs steady-state windows
-- identifying which execution phases are performance-critical
-- correlating work with user-visible impact
-
-Still no AI.
-Still deterministic.
-
-Only after that does it make sense to ask:
-
-> Can an agent help explain *why* performance regressed?
+* breaking the trace into time windows (startup vs steady state)
+* correlating jank and stalls with those windows
+* surfacing "what to look at first" signals
 
 ---
 
